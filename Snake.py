@@ -58,6 +58,7 @@ close=False
 while not close:
     
     for event in pygame.event.get():
+        # print(event)
         
         #close and exit if exit button is clikced.
         if event.type==pygame.QUIT: 
@@ -66,17 +67,17 @@ while not close:
         #moving snake
         if event.type==pygame.KEYDOWN:
             if event.key==pygame.K_LEFT:
-                x=-10
+                x=-1
                 y=0
             elif event.key==pygame.K_RIGHT:
-                x=10
+                x=1
                 y=0
             elif event.key==pygame.K_UP:
                 x=0
-                y=-10
+                y=-1
             elif event.key==pygame.K_DOWN:
                 x=0
-                y=10
+                y=1
                 
     Snake=Snake.move(x,y)
     disp.fill((100,0,255))
@@ -92,8 +93,13 @@ while not close:
     
     pygame.draw.rect(disp,SnakeColor,Snake)
     pygame.draw.circle(disp, white, (cx,cy), cr)
+   
+    #check if food is eaten
+    if Snake[1]<cy<Snake[1]+10 and Snake[0]<cx<Snake[0]+10 :
+        print('Yummy')
+        
     
-    pygame.time.delay(100)  
+    pygame.time.delay(10)  
     pygame.display.update()
     
 pygame.quit()
